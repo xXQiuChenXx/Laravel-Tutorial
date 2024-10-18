@@ -9,4 +9,9 @@ class Projects extends Model
 {
     /** @use HasFactory<\Database\Factories\ProjectsFactory> */
     use HasFactory;
+
+    public function tasks()
+    {
+        return $this->hasMany(Tasks::class);
+    }
 }
