@@ -13,6 +13,12 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        $query = Projects::query();
+
+        $projects = $query->paginate(10)->items();
+
+        
+
         return inertia("Project/Index", []);
     }
 
