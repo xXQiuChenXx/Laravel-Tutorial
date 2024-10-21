@@ -1,7 +1,22 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
-export default function Index({ projects }) {
+type Props = {
+  projects: {
+    id: number;
+    name: string;
+    description: string;
+    due_date: string;
+    status: string;
+    image_path: string;
+    created_at: string;
+    updated_at: string;
+    created_by: number;
+    updated_by: number;
+  };
+};
+
+export default function Index({ projects }: Props) {
   return (
     <AuthenticatedLayout
       header={
