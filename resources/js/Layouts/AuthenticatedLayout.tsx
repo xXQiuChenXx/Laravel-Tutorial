@@ -3,9 +3,12 @@ import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link, usePage } from "@inertiajs/react";
-import { useState } from "react";
+import { PropsWithChildren, ReactNode, useState } from "react";
 
-export default function AuthenticatedLayout({ header, children }) {
+export default function Authenticated({
+  header,
+  children,
+}: PropsWithChildren<{ header?: ReactNode }>) {
   const user = usePage().props.auth.user;
 
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
@@ -30,24 +33,6 @@ export default function AuthenticatedLayout({ header, children }) {
                 >
                   Dashboard
                 </NavLink>
-                <NavLink
-                  href={route("project.index")}
-                  active={route().current("project.index")}
-                >
-                  Projects
-                </NavLink>
-                <NavLink
-                  href={route("task.index")}
-                  active={route().current("task.index")}
-                >
-                  Tasks
-                </NavLink>
-                <NavLink
-                  href={route("user.index")}
-                  active={route().current("user.index")}
-                >
-                  Users
-                </NavLink>
               </div>
             </div>
 
@@ -58,7 +43,7 @@ export default function AuthenticatedLayout({ header, children }) {
                     <span className="inline-flex rounded-md">
                       <button
                         type="button"
-                        className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
+                        className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
                       >
                         {user.name}
 
@@ -149,7 +134,7 @@ export default function AuthenticatedLayout({ header, children }) {
 
           <div className="border-t border-gray-200 pb-1 pt-4 dark:border-gray-600">
             <div className="px-4">
-              <div className="text-base font-medium text-gray-800 dark:text-gray-200">
+              <div className="text-base font-medium text-gray-800">
                 {user.name}
               </div>
               <div className="text-sm font-medium text-gray-500">
