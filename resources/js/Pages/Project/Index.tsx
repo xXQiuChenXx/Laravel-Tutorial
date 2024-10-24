@@ -1,23 +1,8 @@
-import { DataTableDemo } from "@/Components/DataTable";
+import { ProjectTable } from "@/Components/ProjectsTable";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
-type Props = {
-  projects: {
-    id: number;
-    name: string;
-    description: string;
-    due_date: string;
-    status: string;
-    image_path: string;
-    created_at: string;
-    updated_at: string;
-    created_by: number;
-    updated_by: number;
-  };
-};
-
-export default function Index({ projects }: Props) {
+export default function Index({ projects }: { projects: App.Models.Projects }) {
   return (
     <AuthenticatedLayout
       header={
@@ -28,8 +13,7 @@ export default function Index({ projects }: Props) {
     >
       <Head title="Projects" />
 
-      <DataTableDemo />
-      
+      <ProjectTable projects={projects} />
     </AuthenticatedLayout>
   );
 }
