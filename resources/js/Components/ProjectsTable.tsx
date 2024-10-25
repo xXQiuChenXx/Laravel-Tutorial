@@ -188,6 +188,7 @@ export function ProjectTable({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+  console.log(projects)
 
   const table = useReactTable({
     columns,

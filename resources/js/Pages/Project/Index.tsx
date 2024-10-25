@@ -5,7 +5,7 @@ import { Head } from "@inertiajs/react";
 export default function Index({
   projects,
 }: {
-  projects: App.Models.Projects[];
+  projects: { data: App.Models.Projects[] };
 }) {
   return (
     <AuthenticatedLayout
@@ -17,7 +17,7 @@ export default function Index({
     >
       <Head title="Projects" />
 
-      <ProjectTable projects={projects} />
+      <ProjectTable projects={projects.data} />
     </AuthenticatedLayout>
   );
 }
