@@ -4,9 +4,12 @@ import { Head } from "@inertiajs/react";
 
 export default function Index({
   projects,
+  pagination
 }: {
   projects: { data: App.Models.Projects[] };
+  pagination: any
 }) {
+  console.log(pagination)
   return (
     <AuthenticatedLayout
       header={
@@ -17,7 +20,7 @@ export default function Index({
     >
       <Head title="Projects" />
 
-      <ProjectTable projects={projects.data} />
+      <ProjectTable projects={projects.data} paginations={pagination}/>
     </AuthenticatedLayout>
   );
 }

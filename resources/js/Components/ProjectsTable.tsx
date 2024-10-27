@@ -39,6 +39,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/Components/ui/table";
+import { router } from "@inertiajs/react";
 
 export const columns: ColumnDef<App.Models.Projects>[] = [
   {
@@ -178,7 +179,9 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
 
 export function ProjectTable({
   projects,
+  paginations,
 }: {
+  paginations: any;
   projects: App.Models.Projects[];
 }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -188,6 +191,10 @@ export function ProjectTable({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+  const [pagination, setPagination] = React.useState({
+    pageIndex: paginations.current_page,
+    pageSize: paginations.last_page,
+  });
 
   const table = useReactTable({
     columns,
@@ -200,8 +207,22 @@ export function ProjectTable({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    pageCount: paginations.last_page,
+    manualPagination: true,
+    onPaginationChange: () => {
+      setPagination({ ...pagination, pageIndex: pagination.pageIndex + 1 });
+      router.visit("/projects", {
+        data: { page: pagination.pageIndex },
+        replace: true,
+      });
+    },
+    // onPaginationChange: async (updater) => {
+    //   const pageNumber = updater.pageIndex + 1;
+    //   Inertia.get("/projects", { page: pageNumber }, { replace: true });
+    // },
     state: {
       sorting,
+      pagination,
       columnFilters,
       columnVisibility,
       rowSelection,
