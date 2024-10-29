@@ -342,6 +342,7 @@ export function ProjectTable({
               <PaginationItem>
                 <Button
                   size="icon"
+                  variant="ghost"
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
                 >
@@ -365,11 +366,12 @@ export function ProjectTable({
               ))}
               <PaginationItem>
                 <Button
+                  variant="ghost"
                   size="icon"
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}
                 >
-                  <ChevronRightIcon className="h-4 w-4"/>
+                  <ChevronRightIcon className="h-4 w-4" />
                 </Button>
               </PaginationItem>
             </PaginationContent>
