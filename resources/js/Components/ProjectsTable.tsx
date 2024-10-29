@@ -4,12 +4,16 @@ import * as React from "react";
 import {
   CaretSortIcon,
   ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
   DotsHorizontalIcon,
 } from "@radix-ui/react-icons";
 import {
   ColumnDef,
   ColumnFiltersState,
+  PaginationState,
   SortingState,
+  Updater,
   VisibilityState,
   flexRender,
   getCoreRowModel,
@@ -18,6 +22,16 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/Components/ui/pagination";
 
 import { Button } from "@/Components/ui/button";
 import { Checkbox } from "@/Components/ui/checkbox";
@@ -192,9 +206,10 @@ export function ProjectTable({
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
   const [pagination, setPagination] = React.useState({
-    pageIndex: paginations.current_page,
+    pageIndex: paginations.current_page - 1,
     pageSize: paginations.last_page,
   });
+  console.log(pagination.pageIndex);
 
   const table = useReactTable({
     columns,
@@ -209,17 +224,16 @@ export function ProjectTable({
     onRowSelectionChange: setRowSelection,
     pageCount: paginations.last_page,
     manualPagination: true,
-    onPaginationChange: () => {
-      setPagination({ ...pagination, pageIndex: pagination.pageIndex + 1 });
+    onPaginationChange: (updater: Updater<PaginationState>) => {
+      const newPagination =
+        typeof updater === "function" ? updater(pagination) : updater;
+      setPagination(newPagination);
       router.visit("/projects", {
-        data: { page: pagination.pageIndex },
-        replace: true,
+        data: { page: newPagination.pageIndex + 1 },
+        preserveState: true,
+        preserveScroll: true,
       });
     },
-    // onPaginationChange: async (updater) => {
-    //   const pageNumber = updater.pageIndex + 1;
-    //   Inertia.get("/projects", { page: pageNumber }, { replace: true });
-    // },
     state: {
       sorting,
       pagination,
@@ -323,22 +337,43 @@ export function ProjectTable({
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
         <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <Button
+                  size="icon"
+                  onClick={() => table.previousPage()}
+                  disabled={!table.getCanPreviousPage()}
+                >
+                  <ChevronLeftIcon className="h-4 w-4" />
+                </Button>
+              </PaginationItem>
+              {Array.from({ length: table.getPageCount() }, (_, index) => (
+                <PaginationItem key={index}>
+                  <Button
+                    variant="ghost"
+                    onClick={() => table.setPageIndex(index)}
+                    className={
+                      table.getState().pagination.pageIndex === index
+                        ? "text-white bg-gray-900"
+                        : ""
+                    }
+                  >
+                    {index + 1}
+                  </Button>
+                </PaginationItem>
+              ))}
+              <PaginationItem>
+                <Button
+                  size="icon"
+                  onClick={() => table.nextPage()}
+                  disabled={!table.getCanNextPage()}
+                >
+                  <ChevronRightIcon className="h-4 w-4"/>
+                </Button>
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
         </div>
       </div>
     </div>
