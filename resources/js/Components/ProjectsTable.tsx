@@ -26,7 +26,6 @@ import {
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -53,7 +52,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/Components/ui/table";
-import { router } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 
 export const columns: ColumnDef<App.Models.Projects>[] = [
   {
@@ -96,7 +95,11 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => <div>{row.getValue("name")}</div>,
+    cell: ({ row }) => (
+      <Link href={route("projects.show", row.getValue("id"))}>
+        {row.getValue("name")}
+      </Link>
+    ),
   },
   {
     accessorKey: "status",
@@ -209,7 +212,6 @@ export function ProjectTable({
     pageIndex: paginations.current_page - 1,
     pageSize: paginations.last_page,
   });
-  console.log(pagination.pageIndex);
 
   const table = useReactTable({
     columns,

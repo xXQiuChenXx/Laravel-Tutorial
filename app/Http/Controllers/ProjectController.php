@@ -6,6 +6,7 @@ use App\Models\Projects;
 use App\Http\Requests\StoreProjectsRequest;
 use App\Http\Requests\UpdateProjectsRequest;
 use App\Http\Resources\ProjectResource;
+use Illuminate\Support\Facades\Cache;
 
 class ProjectController extends Controller
 {
@@ -15,7 +16,9 @@ class ProjectController extends Controller
     public function index()
     {
         $query = Projects::query();
-        $projects = $query->paginate(10);
+        $projects = Cache::remember('projects_page_' . request('page', 1), 60, function () {
+            return Projects::paginate(10);
+        });
 
         return inertia("Projects/Index", [
             "projects" => ProjectResource::collection($projects->items()),

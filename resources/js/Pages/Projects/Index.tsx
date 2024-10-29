@@ -9,7 +9,6 @@ export default function Index({
   projects: { data: App.Models.Projects[] };
   pagination: any
 }) {
-  console.log(pagination)
   return (
     <AuthenticatedLayout
       header={
