@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Tasks;
 use App\Http\Requests\StoreTasksRequest;
 use App\Http\Requests\UpdateTasksRequest;
+use App\Http\Resources\TaskResource;
+use Illuminate\Support\Facades\Cache;
 
 class TaskController extends Controller
 {
@@ -13,7 +15,15 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $query = Tasks::query();
+        $tasks = Cache::remember('tasks_page_' . request('page', 1), 60, function () {
+            return Tasks::paginate(10);
+        });
+
+        return inertia("Tasks/Index", [
+            'tasks' => TaskResource::collection($tasks->items()),
+            'queryParams' => request()->query() ?: null
+        ]);
     }
 
     /**
