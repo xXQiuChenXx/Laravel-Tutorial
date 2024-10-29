@@ -15,6 +15,7 @@ export default function UpdateProfileInformation({
     status?: string;
     className?: string;
 }) {
+    //@ts-ignore
     const user = usePage().props.auth.user;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
