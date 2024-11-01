@@ -22,7 +22,15 @@ class TaskController extends Controller
 
         return inertia("Tasks/Index", [
             'tasks' => TaskResource::collection($tasks->items()),
-            'queryParams' => request()->query() ?: null
+            'queryParams' => request()->query() ?: null,
+            "pagination" => [
+                "current_page" => $tasks->currentPage(),
+                "last_page" => $tasks->lastPage(),
+                "per_page" => $tasks->perPage(),
+                "total" => $tasks->total(),
+                "next_page_url" => $tasks->nextPageUrl(),
+                "prev_page_url" => $tasks->previousPageUrl(),
+            ],
         ]);
     }
 
