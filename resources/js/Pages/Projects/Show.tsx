@@ -15,6 +15,35 @@ const Show = ({
       }
     >
       <Head title="Projects" />
+
+      <div className="py-12">
+        <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
+            <img
+              src={data.image_path}
+              alt="image"
+              className="w-full h-64 object-cover"
+            />
+            <div className="p-6 text-gray-900 dark:text-gray-100"></div>
+            <div className="grid gap-1 grid-cols-2">
+              <div>
+                <div>
+                  <label htmlFor="" className="font-bold text-lg">
+                    Project ID
+                  </label>
+                  <p className="mt-1">{data.id}</p>
+                </div>
+                <div>
+                  <label htmlFor="" className="font-bold text-lg">
+                    Project Name
+                  </label>
+                  <p className="mt-1">{data.name}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </AuthenticatedLayout>
   );
 };

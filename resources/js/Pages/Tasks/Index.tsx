@@ -1,13 +1,18 @@
+import { DataTable } from "@/Components/DataTable";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
 export default function Index({
   tasks,
   queryParams,
+  pagination
 }: {
   tasks: { data: App.Models.Tasks[] };
   queryParams: any;
+  pagination: any
 }) {
+
+  
   return (
     <AuthenticatedLayout
       header={
@@ -17,7 +22,8 @@ export default function Index({
       }
     >
       <Head title="Tasks" />
-      Task table
+      
+      <DataTable data={tasks.data} paginations={pagination}/>
     </AuthenticatedLayout>
   );
 }
