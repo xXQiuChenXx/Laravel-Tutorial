@@ -40,7 +40,6 @@ export function DataTable({
   paginations: any;
   data: App.Models.Projects[];
 }) {
-  console.log(paginations);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
