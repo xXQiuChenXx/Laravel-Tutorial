@@ -38,7 +38,7 @@ export function DataTable({
   paginations,
 }: {
   paginations: any;
-  data: any;
+  data: App.Models.Projects[];
 }) {
   console.log(paginations);
   const [sorting, setSorting] = React.useState<SortingState>([]);
