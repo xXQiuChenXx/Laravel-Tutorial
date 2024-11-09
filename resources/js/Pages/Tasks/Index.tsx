@@ -1,14 +1,12 @@
-import { DataTable } from "@/Components/DataTable";
+import { DataTable } from "@/Components/task_table/DataTable";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
 export default function Index({
   tasks,
-  queryParams,
   pagination
 }: {
   tasks: { data: App.Models.Tasks[] };
-  queryParams: any;
   pagination: any
 }) {
 

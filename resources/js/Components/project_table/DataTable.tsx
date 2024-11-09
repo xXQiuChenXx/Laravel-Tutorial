@@ -30,8 +30,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/Components/ui/table";
-import { columns } from "@/Components/DataColumn";
-import PaginationBar from "./Pagination";
+import { columns } from "@/Components/project_table/TableColumn";
+import PaginationBar from "@/Components/Pagination";
 
 export function DataTable({
   data,

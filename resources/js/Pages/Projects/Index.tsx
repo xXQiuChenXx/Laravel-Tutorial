@@ -1,4 +1,4 @@
-import { DataTable } from "@/Components/DataTable";
+import { DataTable } from "@/Components/project_table/DataTable";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
