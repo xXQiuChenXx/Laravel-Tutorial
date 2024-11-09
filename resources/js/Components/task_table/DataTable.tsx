@@ -164,7 +164,7 @@ export function DataTable({
             {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
           <div className="space-x-2">
-            <PaginationBar paginations={paginations} table={table} />
+            <PaginationBar paginations={paginations} />
           </div>
         </div>
       </div>
