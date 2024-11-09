@@ -8,9 +8,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/Components/ui/pagination";
-import { Table } from "@tanstack/react-table";
 
-interface Props {
+export interface PaginationProps {
   paginations: {
     current_page: number;
     last_page: number;
@@ -18,7 +17,6 @@ interface Props {
     prev_page_url: string;
     page_urls: string[];
   };
-  table: Table<any>;
 }
 
 export default function PaginationBar({
@@ -29,8 +27,7 @@ export default function PaginationBar({
     last_page,
     page_urls,
   },
-  table,
-}: Props) {
+}: PaginationProps) {
   const generatePageNumbers = () => {
     const pageNumbers = [];
     const maxVisiblePages = 5;
