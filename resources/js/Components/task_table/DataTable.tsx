@@ -31,16 +31,15 @@ import {
   TableRow,
 } from "@/Components/ui/table";
 import { columns } from "@/Components/task_table/TableColumn";
-import { PaginationBar } from "@/Components/Pagination";
+import { PaginationBar, PaginationProps } from "@/Components/Pagination";
 
 export function DataTable({
   data,
   paginations,
 }: {
-  paginations: any;
-  data: any;
+  paginations: PaginationProps;
+  data: App.Models.Tasks[];
 }) {
-  console.log(paginations);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
