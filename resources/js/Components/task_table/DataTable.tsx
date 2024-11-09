@@ -31,7 +31,7 @@ import {
   TableRow,
 } from "@/Components/ui/table";
 import { columns } from "@/Components/task_table/TableColumn";
-import PaginationBar from "@/Components/Pagination";
+import { PaginationBar } from "@/Components/Pagination";
 
 export function DataTable({
   data,
