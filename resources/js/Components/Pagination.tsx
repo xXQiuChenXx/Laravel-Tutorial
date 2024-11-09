@@ -10,13 +10,11 @@ import {
 } from "@/Components/ui/pagination";
 
 export interface PaginationProps {
-  paginations: {
-    current_page: number;
-    last_page: number;
-    next_page_url: string;
-    prev_page_url: string;
-    page_urls: string[];
-  };
+  current_page: number;
+  last_page: number;
+  next_page_url: string;
+  prev_page_url: string;
+  page_urls: string[];
 }
 
 export const PaginationBar = ({
@@ -27,7 +25,9 @@ export const PaginationBar = ({
     last_page,
     page_urls,
   },
-}: PaginationProps) => {
+}: {
+  paginations: PaginationProps;
+}) => {
   const generatePageNumbers = () => {
     const pageNumbers = [];
     const maxVisiblePages = 5;
