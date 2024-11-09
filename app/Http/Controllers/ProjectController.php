@@ -15,18 +15,16 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $query = Projects::query();
-        $projects = Cache::remember('projects_page_' . request('page', 1), 60, function () {
-            return Projects::paginate(10);
-        });
+        $projects = Projects::paginate(10);
 
         return inertia("Projects/Index", [
             "projects" => ProjectResource::collection($projects->items()),
             "pagination" => [
                 "current_page" => $projects->currentPage(),
+                "page_urls" => $projects->getUrlRange(1, $projects->lastPage()),
                 "last_page" => $projects->lastPage(),
-                "per_page" => $projects->perPage(),
-                "total" => $projects->total(),
+                "per_page" => 10,
+                "total_items" => $projects->total(),
                 "next_page_url" => $projects->nextPageUrl(),
                 "prev_page_url" => $projects->previousPageUrl(),
             ],

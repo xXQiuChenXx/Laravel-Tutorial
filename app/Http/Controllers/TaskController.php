@@ -15,19 +15,16 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $query = Tasks::query();
-        $tasks = Cache::remember('tasks_page_' . request('page', 1), 60, function () {
-            return Tasks::paginate(10);
-        });
+        $tasks = Tasks::paginate(10);
 
         return inertia("Tasks/Index", [
             'tasks' => TaskResource::collection($tasks->items()),
-            'queryParams' => request()->query() ?: null,
             "pagination" => [
                 "current_page" => $tasks->currentPage(),
+                "page_urls" => $tasks->getUrlRange(1, $tasks->lastPage()),
                 "last_page" => $tasks->lastPage(),
-                "per_page" => $tasks->perPage(),
-                "total" => $tasks->total(),
+                "per_page" => 10,
+                "total_items" => $tasks->total(),
                 "next_page_url" => $tasks->nextPageUrl(),
                 "prev_page_url" => $tasks->previousPageUrl(),
             ],
