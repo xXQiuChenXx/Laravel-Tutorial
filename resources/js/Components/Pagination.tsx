@@ -19,7 +19,7 @@ export interface PaginationProps {
   };
 }
 
-export default function PaginationBar({
+export const PaginationBar = ({
   paginations: {
     current_page,
     next_page_url,
@@ -27,7 +27,7 @@ export default function PaginationBar({
     last_page,
     page_urls,
   },
-}: PaginationProps) {
+}: PaginationProps) => {
   const generatePageNumbers = () => {
     const pageNumbers = [];
     const maxVisiblePages = 5;
@@ -89,4 +89,4 @@ export default function PaginationBar({
       </PaginationContent>
     </Pagination>
   );
-}
+};
