@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu";
 
-export const columns: ColumnDef<App.Models.Projects>[] = [
+export const columns: ColumnDef<App.Models.Tasks>[] = [
   {
     id: "select",
     header: ({ table }) => (
