@@ -23,8 +23,6 @@ class TaskController extends Controller
                 "current_page" => $tasks->currentPage(),
                 "page_urls" => $tasks->getUrlRange(1, $tasks->lastPage()),
                 "last_page" => $tasks->lastPage(),
-                "per_page" => 10,
-                "total_items" => $tasks->total(),
                 "next_page_url" => $tasks->nextPageUrl(),
                 "prev_page_url" => $tasks->previousPageUrl(),
             ],
