@@ -33,11 +33,9 @@ import {
 import { columns } from "@/Components/project_table/TableColumn";
 import { PaginationBar } from "@/Components/Pagination";
 
-export function DataTable({
+export function ProjectTable({
   data,
-  paginations,
 }: {
-  paginations: any;
   data: App.Models.Projects[];
 }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -59,7 +57,6 @@ export function DataTable({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
-    pageCount: paginations.last_page,
     state: {
       sorting,
       columnFilters,
@@ -163,7 +160,7 @@ export function DataTable({
             {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
           <div className="space-x-2">
-            <PaginationBar paginations={paginations} />
+            {/* <PaginationBar paginations={paginations} /> */}
           </div>
         </div>
       </div>

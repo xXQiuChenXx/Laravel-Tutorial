@@ -18,7 +18,7 @@ class ProjectController extends Controller
         $projects = Projects::paginate(10);
 
         return inertia("Projects/Index", [
-            "projects" => ProjectResource::collection($projects->items()),
+            "projects" => ProjectResource::collection(Projects::all()),
             "pagination" => [
                 "current_page" => $projects->currentPage(),
                 "page_urls" => $projects->getUrlRange(1, $projects->lastPage()),
