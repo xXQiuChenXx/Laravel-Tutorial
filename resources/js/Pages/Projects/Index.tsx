@@ -1,13 +1,11 @@
-import { DataTable } from "@/Components/project_table/DataTable";
+import { ProjectTable } from "@/Components/project_table/DataTable";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
 export default function Index({
   projects,
-  pagination
 }: {
   projects: { data: App.Models.Projects[] };
-  pagination: any
 }) {
   return (
     <AuthenticatedLayout
@@ -19,7 +17,7 @@ export default function Index({
     >
       <Head title="Projects" />
 
-      <DataTable data={projects.data} paginations={pagination}/>
+      <ProjectTable data={projects.data} />
     </AuthenticatedLayout>
   );
 }

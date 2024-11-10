@@ -37,8 +37,19 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
   },
   {
     accessorKey: "id",
-    header: "ID",
-    cell: ({ row }) => <div className="capitalize">{row.getValue("id")}</div>,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          className="flex items-center"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          ID
+          <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => <div className="capitalize text-center">{row.getValue("id")}</div>,
   },
   {
     accessorKey: "name",
