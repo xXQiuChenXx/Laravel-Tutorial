@@ -45,7 +45,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           ID
-          <CaretSortIcon className="ml-2 h-4 w-4" />
+          <CaretSortIcon className="h-4 w-4" />
         </Button>
       );
     },
