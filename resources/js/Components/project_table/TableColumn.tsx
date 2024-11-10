@@ -49,7 +49,9 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => <div className="capitalize text-center">{row.getValue("id")}</div>,
+    cell: ({ row }) => (
+      <div className="capitalize text-center">{row.getValue("id")}</div>
+    ),
   },
   {
     accessorKey: "name",
@@ -60,7 +62,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Name
-          <CaretSortIcon className="ml-2 h-4 w-4" />
+          <CaretSortIcon className="h-4 w-4" />
         </Button>
       );
     },
@@ -94,7 +96,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Created at
-          <CaretSortIcon className="ml-2 h-4 w-4" />
+          <CaretSortIcon className="h-4 w-4" />
         </Button>
       );
     },
@@ -109,7 +111,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Due Date
-          <CaretSortIcon className="ml-2 h-4 w-4" />
+          <CaretSortIcon className="h-4 w-4" />
         </Button>
       );
     },
@@ -124,7 +126,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Created By
-          <CaretSortIcon className="ml-2 h-4 w-4" />
+          <CaretSortIcon className="h-4 w-4" />
         </Button>
       );
     },
