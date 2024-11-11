@@ -68,6 +68,7 @@ export function ProjectTable({
   return (
     <div className="py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800 p-6 text-gray-900 dark:text-gray-100">
+        <h1 className="font-bold text-xl">Projects List Session 2024/25</h1>
         <div className="flex items-center py-4">
           <Input
             placeholder="Filter name..."
