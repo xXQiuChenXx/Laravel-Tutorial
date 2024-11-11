@@ -11,6 +11,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu";
+import { STATUS_COLOR_MAP, STATUS_TEXT_MAP } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 export const columns: ColumnDef<App.Models.Tasks>[] = [
   {
@@ -72,7 +74,19 @@ export const columns: ColumnDef<App.Models.Tasks>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => <div>{row.getValue("status")}</div>,
+    cell: ({ row }) => {
+      const STATUS = row.getValue("status") as keyof typeof STATUS_TEXT_MAP;
+      return (
+        <p
+          className={cn(
+            STATUS_COLOR_MAP[STATUS],
+            "text-sm font-bold border-2 px-2 w-fit"
+          )}
+        >
+          {STATUS_TEXT_MAP[STATUS]}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "created_at",
