@@ -1,8 +1,11 @@
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
+import SelectInput from "@/Components/SelectInput";
+import TextAreaInput from "@/Components/TextAreaInput";
 import TextInput from "@/Components/TextInput";
+import { Button } from "@/Components/ui/button";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm } from "@inertiajs/react";
+import { Head, Link, useForm } from "@inertiajs/react";
 import { FormEvent } from "react";
 
 const Create = () => {
@@ -69,7 +72,7 @@ const Create = () => {
                 value="Project description:"
                 className="font-bold text-lg mb-1"
               />
-              <TextInput
+              <TextAreaInput
                 id="project_description"
                 type="text"
                 name="description"
@@ -78,6 +81,51 @@ const Create = () => {
                 onChange={(e) => setData("description", e.target.value)}
               />
               <InputError message={errors.description} className="mt-2" />
+            </div>
+            <div>
+              <InputLabel
+                htmlFor="project_due_date"
+                value="Project Deadline:"
+                className="font-bold text-lg mb-1"
+              />
+              <TextInput
+                id="project_due_date"
+                type="date"
+                name="due_date"
+                value={data.due_date}
+                className="mt-1 block w-full"
+                onChange={(e) => setData("due_date", e.target.value)}
+              />
+              <InputError message={errors.due_date} className="mt-2" />
+            </div>
+            <div>
+              <InputLabel
+                htmlFor="project_status"
+                value="Project Status:"
+                className="font-bold text-lg mb-1"
+              />
+              <SelectInput
+                id="project_status"
+                type="date"
+                name="status"
+                value={data.status}
+                className="mt-1 block w-full"
+                onChange={(e) => setData("status", e.target.value)}
+              >
+                <option value="">Select Status</option>
+                <option value="pending">Pending</option>
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
+              </SelectInput>
+              <InputError message={errors.status} className="mt-2" />
+            </div>
+            <div className="ml-auto">
+              <div className="flex items-center gap-3">
+                <Link href={route("projects.index")}>
+                  <Button variant="outline">Cancel</Button>
+                </Link>
+                <Button type="submit">Create</Button>
+              </div>
             </div>
           </form>
         </div>
