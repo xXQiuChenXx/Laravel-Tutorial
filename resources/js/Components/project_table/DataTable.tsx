@@ -31,7 +31,6 @@ import {
   TableRow,
 } from "@/Components/ui/table";
 import { columns } from "@/Components/project_table/TableColumn";
-import { PaginationBar } from "@/Components/Pagination";
 import { DataTablePagination } from "./TablePagination";
 
 export function ProjectTable({ data }: { data: App.Models.Projects[] }) {
