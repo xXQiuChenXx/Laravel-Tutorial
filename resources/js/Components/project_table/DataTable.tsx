@@ -32,12 +32,9 @@ import {
 } from "@/Components/ui/table";
 import { columns } from "@/Components/project_table/TableColumn";
 import { PaginationBar } from "@/Components/Pagination";
+import { DataTablePagination } from "./TablePagination";
 
-export function ProjectTable({
-  data,
-}: {
-  data: App.Models.Projects[];
-}) {
+export function ProjectTable({ data }: { data: App.Models.Projects[] }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -155,15 +152,7 @@ export function ProjectTable({
             </TableBody>
           </Table>
         </div>
-        <div className="flex items-center justify-end space-x-2 py-4">
-          <div className="flex-1 text-sm text-muted-foreground">
-            {table.getFilteredSelectedRowModel().rows.length} of{" "}
-            {table.getFilteredRowModel().rows.length} row(s) selected.
-          </div>
-          <div className="space-x-2">
-            {/* <PaginationBar paginations={paginations} /> */}
-          </div>
-        </div>
+        <DataTablePagination table={table} />
       </div>
     </div>
   );
