@@ -54,7 +54,7 @@ export const columns: ColumnDef<App.Models.Tasks>[] = [
       );
     },
     cell: ({ row }) => (
-      <Link href={route("tasks.show", row.getValue("id"))}>
+      <Link href={route("task.show", row.getValue("id"))}>
         {row.getValue("name")}
       </Link>
     ),
