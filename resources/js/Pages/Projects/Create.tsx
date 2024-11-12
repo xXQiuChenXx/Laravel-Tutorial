@@ -4,6 +4,7 @@ import SelectInput from "@/Components/SelectInput";
 import TextAreaInput from "@/Components/TextAreaInput";
 import TextInput from "@/Components/TextInput";
 import { Button } from "@/Components/ui/button";
+import { Progress } from "@/Components/ui/progress";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { FormEvent } from "react";
@@ -52,11 +53,7 @@ const Create = () => {
                   }
                 }}
               />
-              {progress && (
-                <progress value={progress.percentage} max="100">
-                  {progress.percentage}%
-                </progress>
-              )}
+              {progress && <Progress value={progress.percentage} />}
               <InputError message={errors.image} className="mt-2" />
             </div>
             <div>
