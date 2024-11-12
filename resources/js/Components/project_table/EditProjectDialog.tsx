@@ -43,7 +43,7 @@ const EditProjectDialog = ({ project, ...props }: EditProjectDialogProps) => {
 
   return (
     <Sheet {...props}>
-      <SheetContent className="w-full max-w-lg sm:max-w-lg">
+      <SheetContent className="w-full max-w-md lg:max-w-lg">
         <SheetHeader>
           <SheetTitle>Edit Project</SheetTitle>
           <SheetDescription>
