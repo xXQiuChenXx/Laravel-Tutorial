@@ -6,7 +6,7 @@ use App\Models\Projects;
 use App\Http\Requests\StoreProjectsRequest;
 use App\Http\Requests\UpdateProjectsRequest;
 use App\Http\Resources\ProjectResource;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -45,7 +45,11 @@ class ProjectController extends Controller
     public function store(StoreProjectsRequest $request)
     {
         $data = $request->validated();
-        dd($data);
+        $data['created_by'] = Auth::id();
+        $data['updated_by'] = Auth::id();
+        Projects::create($data);
+
+        return to_route('projects.index')->with('success', 'Project created successfully');
     }
 
     /**

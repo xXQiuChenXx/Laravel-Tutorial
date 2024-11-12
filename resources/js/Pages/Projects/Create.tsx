@@ -64,7 +64,7 @@ const Create = () => {
                 className="mt-1 block w-full"
                 onChange={(e) => setData("name", e.target.value)}
               />
-              <InputError message={errors.image} className="mt-2" />
+              <InputError message={errors.name} className="mt-2" />
             </div>
             <div>
               <InputLabel
