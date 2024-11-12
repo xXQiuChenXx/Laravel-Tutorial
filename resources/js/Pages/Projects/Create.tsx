@@ -53,7 +53,7 @@ const Create = () => {
                   }
                 }}
               />
-              {progress && <Progress value={progress.percentage} />}
+              {progress && <Progress value={progress.percentage} className="my-2"/>}
               <InputError message={errors.image} className="mt-2" />
             </div>
             <div>
