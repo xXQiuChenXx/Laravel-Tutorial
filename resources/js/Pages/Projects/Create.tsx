@@ -45,6 +45,7 @@ const Create = () => {
                 id="project_image"
                 type="file"
                 name="image"
+                accept=".jpg, .jpeg, .png"
                 className="mt-1 block w-full"
                 onChange={(e) => {
                   if (e.target.files) {
@@ -53,7 +54,9 @@ const Create = () => {
                   }
                 }}
               />
-              {progress && <Progress value={progress.percentage} className="my-2"/>}
+              {progress && (
+                <Progress value={progress.percentage} className="my-2" />
+              )}
               <InputError message={errors.image} className="mt-2" />
             </div>
             <div>
