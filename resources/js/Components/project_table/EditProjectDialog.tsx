@@ -123,6 +123,7 @@ const EditProjectDialog = ({ project, ...props }: EditProjectDialogProps) => {
               type="file"
               name="image"
               className="col-span-3"
+              accept=".jpg, .jpeg, .png"
               // @ts-ignore
               onChange={(e) => setData("image", e.target.files[0])}
             />
