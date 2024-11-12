@@ -76,7 +76,7 @@ const Create = () => {
                 id="project_description"
                 type="text"
                 name="description"
-                value={data.name}
+                value={data.description}
                 className="mt-1 block w-full"
                 onChange={(e) => setData("description", e.target.value)}
               />

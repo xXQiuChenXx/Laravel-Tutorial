@@ -44,7 +44,8 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectsRequest $request)
     {
-        //
+        $data = $request->validated();
+        dd($data);
     }
 
     /**
