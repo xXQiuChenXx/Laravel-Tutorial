@@ -13,6 +13,8 @@ import {
 } from "@/Components/ui/dropdown-menu";
 import { STATUS_COLOR_MAP, STATUS_TEXT_MAP } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import DeleteDialog from "../action-dialog/DeleteDialog";
+import { useState } from "react";
 
 export const columns: ColumnDef<App.Models.Projects>[] = [
   {
@@ -153,33 +155,43 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const projects = row.original;
+      const project = row.original;
+      const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+      const [showEditDialog, setShowEditDialog] = useState(false);
+
+      const onDelete = () => {
+        router.delete(route("projects.destroy", project.id));
+      };
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <DotsHorizontalIcon className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(projects.name)}
-            >
-              Copy Project
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={(e) => {
-                router.delete(route("projects.destroy", projects.id));
-              }}
-            >
-              Delete
-            </DropdownMenuItem>
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <>
+          <DeleteDialog
+            title="Delete Project Confirm"
+            description={`Are you sure you want to delete project - ${project.name}`}
+            onDelete={onDelete}
+            open={showDeleteDialog}
+          />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <DotsHorizontalIcon className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                onClick={() => navigator.clipboard.writeText(project.name)}
+              >
+                Copy Project
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={(e) => setShowDeleteDialog(true)}>
+                Delete
+              </DropdownMenuItem>
+              <DropdownMenuItem>Edit</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </>
       );
     },
   },
