@@ -7,6 +7,8 @@ use App\Http\Requests\StoreProjectsRequest;
 use App\Http\Requests\UpdateProjectsRequest;
 use App\Http\Resources\ProjectResource;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProjectController extends Controller
 {
@@ -17,6 +19,7 @@ class ProjectController extends Controller
     {
         return inertia("Projects/Index", [
             "projects" => ProjectResource::collection(Projects::all()),
+            "success" => session('success')
         ]);
     }
 
@@ -36,6 +39,10 @@ class ProjectController extends Controller
         $data = $request->validated();
         $data['created_by'] = Auth::id();
         $data['updated_by'] = Auth::id();
+        $path = $request->file('image')->store('images', 'public');
+        $data['image_path'] = Storage::url($path);
+        unset($data["image"]);
+
         Projects::create($data);
 
         return to_route('projects.index')->with('success', 'Project created successfully');

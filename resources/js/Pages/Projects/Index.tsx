@@ -5,8 +5,10 @@ import { Head, Link } from "@inertiajs/react";
 
 export default function Index({
   projects,
+  success,
 }: {
   projects: { data: App.Models.Projects[] };
+  success: string;
 }) {
   return (
     <AuthenticatedLayout
@@ -23,7 +25,16 @@ export default function Index({
     >
       <Head title="Projects" />
 
-      <ProjectTable data={projects.data} />
+      <div className="py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800 p-6 text-gray-900 dark:text-gray-100">
+          {success && (
+            <div className="bg-emerald-500 py-2 px-3 mb-3 text-white rounded">
+              {success}
+            </div>
+          )}
+          <ProjectTable data={projects.data} />
+        </div>
+      </div>
     </AuthenticatedLayout>
   );
 }
