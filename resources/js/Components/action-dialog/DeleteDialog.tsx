@@ -10,7 +10,7 @@ import {
 } from "@/Components/ui/dialog";
 import { ComponentPropsWithRef } from "react";
 
-interface DeleteItemProps extends ComponentPropsWithRef<typeof Dialog> {
+interface DeleteDialogProps extends ComponentPropsWithRef<typeof Dialog> {
   title: string;
   description: string;
   onDelete: () => void;
@@ -21,7 +21,7 @@ const DeleteDialog = ({
   description,
   onDelete,
   ...props
-}: DeleteItemProps) => {
+}: DeleteDialogProps) => {
   return (
     <Dialog {...props}>
       <DialogContent className="sm:max-w-md">

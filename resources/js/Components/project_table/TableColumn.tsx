@@ -15,6 +15,7 @@ import { STATUS_COLOR_MAP, STATUS_TEXT_MAP } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import DeleteDialog from "../action-dialog/DeleteDialog";
 import { useState } from "react";
+import EditProjectDialog from "./EditProjectDialog";
 
 export const columns: ColumnDef<App.Models.Projects>[] = [
   {
@@ -168,8 +169,14 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
           <DeleteDialog
             title="Delete Project Confirm"
             description={`Are you sure you want to delete project - ${project.name}`}
+            onOpenChange={setShowDeleteDialog}
             onDelete={onDelete}
             open={showDeleteDialog}
+          />
+          <EditProjectDialog
+            project={project}
+            open={showEditDialog}
+            onOpenChange={setShowEditDialog}
           />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -188,7 +195,9 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
               <DropdownMenuItem onClick={(e) => setShowDeleteDialog(true)}>
                 Delete
               </DropdownMenuItem>
-              <DropdownMenuItem>Edit</DropdownMenuItem>
+              <DropdownMenuItem onClick={(e) => setShowEditDialog(true)}>
+                Edit
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </>
