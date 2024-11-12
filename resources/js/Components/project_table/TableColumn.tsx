@@ -2,7 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/Components/ui/checkbox";
 import { Button } from "@/Components/ui/button";
 import { CaretSortIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -168,11 +168,16 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(projects.name)}
             >
-              Copy payment ID
+              Copy Project
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={(e) => {
+                router.delete(route("projects.destroy", projects.id));
+              }}
+            >
+              Delete
+            </DropdownMenuItem>
+            <DropdownMenuItem>Edit</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
