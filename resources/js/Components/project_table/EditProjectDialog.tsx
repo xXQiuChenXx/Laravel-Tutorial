@@ -28,18 +28,18 @@ interface EditProjectDialogProps extends ComponentPropsWithRef<typeof Sheet> {
 }
 
 const EditProjectDialog = ({ project, ...props }: EditProjectDialogProps) => {
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    post(route("projects.store"));
-  };
-
-  const { data, setData, post, errors, reset, progress } = useForm({
+  const { data, setData, put, errors, reset, progress } = useForm({
     image: null,
     name: project.name || "",
     status: project.status || "",
     description: project.description || "",
     due_date: project.due_date || "",
   });
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    put(route("projects.update", project.id));
+  };
 
   return (
     <Sheet {...props}>
@@ -53,7 +53,7 @@ const EditProjectDialog = ({ project, ...props }: EditProjectDialogProps) => {
         <form className="flex flex-col gap-4 py-4" onSubmit={onSubmit}>
           {project.image_path && (
             <div className="max-w-full max-h-36 overflow-auto">
-              <img src={project.image_path} alt="project_image"/>
+              <img src={project.image_path} alt="project_image" />
             </div>
           )}
           <div>
@@ -129,7 +129,6 @@ const EditProjectDialog = ({ project, ...props }: EditProjectDialogProps) => {
             />
             <InputError message={errors.image} className="mt-2" />
           </div>
-        </form>
         <SheetFooter>
           <SheetClose asChild>
             <Button type="button" variant="outline">
@@ -138,6 +137,7 @@ const EditProjectDialog = ({ project, ...props }: EditProjectDialogProps) => {
           </SheetClose>
           <Button type="submit">Save Changes</Button>
         </SheetFooter>
+        </form>
       </SheetContent>
     </Sheet>
   );
