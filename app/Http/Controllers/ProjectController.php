@@ -18,7 +18,7 @@ class ProjectController extends Controller
     public function index()
     {
         return inertia("Projects/Index", [
-            "projects" => ProjectResource::collection(Projects::all()),
+            "projects" => ProjectResource::collection(Projects::all()->sortBy('id')),
             "success" => session('success')
         ]);
     }
@@ -69,9 +69,22 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProjectsRequest $request, Projects $projects)
+    public function update(UpdateProjectsRequest $request, Projects $project)
     {
-        //
+
+        $data = $request->validated();
+        $data['created_by'] = Auth::id();
+        $data['updated_by'] = Auth::id();
+        if ($data['image']) {
+            if ($project->image_path) {
+                Storage::disk('public')->delete($project->image_path);
+            }
+            $path = $request->file('image')->store('images', 'public');
+            $data['image_path'] = Storage::url($path);
+        }
+        unset($data["image"]);
+        $project->update($data);
+        return to_route('projects.index')->with('success', "Project \"$project->name\" updated successfully");
     }
 
     /**
@@ -80,6 +93,9 @@ class ProjectController extends Controller
     public function destroy(Projects $project)
     {
         $project->delete();
+        if ($project->image_path) {
+            Storage::disk('public')->delete($project->image_path);
+        }
         return to_route("projects.index")
             ->with('success', "Project \"$project->name\" was deleted");
     }
