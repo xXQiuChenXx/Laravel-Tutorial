@@ -3,12 +3,12 @@ import { Checkbox } from "@/Components/ui/checkbox";
 import { Button } from "@/Components/ui/button";
 import { CaretSortIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { Link, router } from "@inertiajs/react";
+import { useToast } from "@/hooks/use-toast";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu";
 import { STATUS_COLOR_MAP, STATUS_TEXT_MAP } from "@/lib/constants";
@@ -158,7 +158,9 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="px-3">{row.getValue<App.Models.Projects>("created_by").name}</div>
+      <div className="px-3">
+        {row.getValue<App.Models.Projects>("created_by").name}
+      </div>
     ),
   },
   {
@@ -168,6 +170,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
       const project = row.original;
       const [showDeleteDialog, setShowDeleteDialog] = useState(false);
       const [showEditDialog, setShowEditDialog] = useState(false);
+      const { toast } = useToast();
 
       const onDelete = () => {
         router.delete(route("projects.destroy", project.id));
@@ -197,9 +200,16 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(project.name)}
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    route("projects.show", row.getValue("id"))
+                  );
+                  toast({
+                    title: "Copied project link to clipboard",
+                  });
+                }}
               >
-                Copy Project
+                Share project
               </DropdownMenuItem>
               <DropdownMenuItem onClick={(e) => setShowDeleteDialog(true)}>
                 Delete
