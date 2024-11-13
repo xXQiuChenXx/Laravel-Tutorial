@@ -5,7 +5,7 @@ import { Head, Link } from "@inertiajs/react";
 
 export default function Index({
   projects,
-  success,
+  success
 }: {
   projects: { data: App.Models.Projects[] };
   success: string;

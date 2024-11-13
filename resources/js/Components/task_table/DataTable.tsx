@@ -31,14 +31,19 @@ import {
   TableRow,
 } from "@/Components/ui/table";
 import { columns } from "@/Components/task_table/TableColumn";
-import { PaginationBar, PaginationProps } from "@/Components/task_table/TablePagination";
+import {
+  PaginationBar,
+  PaginationProps,
+} from "@/Components/task_table/TablePagination";
 
-export function DataTable({
+export function TaskTable({
   data,
   paginations,
+  searchFiledChanged
 }: {
   paginations: PaginationProps;
   data: App.Models.Tasks[];
+  searchFiledChanged: (name: string, value: string) => void;
 }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -74,10 +79,7 @@ export function DataTable({
         <div className="flex items-center py-4">
           <Input
             placeholder="Filter name..."
-            value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("name")?.setFilterValue(event.target.value)
-            }
+            onBlur={(e) => searchFiledChanged("name", e.target.value)}
             className="max-w-sm"
           />
           <DropdownMenu>

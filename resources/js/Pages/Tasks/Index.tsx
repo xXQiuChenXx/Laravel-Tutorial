@@ -1,16 +1,25 @@
-import { DataTable } from "@/Components/task_table/DataTable";
+import { TaskTable } from "@/Components/task_table/DataTable";
+import { PaginationProps } from "@/Components/task_table/TablePagination";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
 export default function Index({
   tasks,
-  pagination
+  pagination,
+  queryParams = {},
 }: {
   tasks: { data: App.Models.Tasks[] };
-  pagination: any
+  queryParams: { [key: string]: any };
+  pagination: PaginationProps;
 }) {
+  const searchFiledChanged = (name: string, value: string) => {
+    if (value) {
+      queryParams[name] = value;
+    } else {
+      delete queryParams[name];
+    }
+  };
 
-  
   return (
     <AuthenticatedLayout
       header={
@@ -20,8 +29,12 @@ export default function Index({
       }
     >
       <Head title="Tasks" />
-      
-      <DataTable data={tasks.data} paginations={pagination}/>
+
+      <TaskTable
+        data={tasks.data}
+        paginations={pagination}
+        searchFiledChanged={searchFiledChanged}
+      />
     </AuthenticatedLayout>
   );
 }
