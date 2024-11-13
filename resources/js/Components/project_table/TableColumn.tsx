@@ -46,7 +46,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
       return (
         <Button
           variant="ghost"
-          className="flex items-center"
+          className="flex items-center px-3"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           ID
@@ -55,7 +55,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="capitalize text-center">{row.getValue("id")}</div>
+      <div className="capitalize px-3">{row.getValue("id")}</div>
     ),
   },
   {
@@ -64,6 +64,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
       return (
         <Button
           variant="ghost"
+          className="flex items-center px-3"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Name
@@ -72,7 +73,10 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
       );
     },
     cell: ({ row }) => (
-      <Link href={route("projects.show", row.getValue("id"))}>
+      <Link
+        href={route("projects.show", row.getValue("id"))}
+        className="hover:underline px-3"
+      >
         {row.getValue("name")}
       </Link>
     ),
@@ -83,25 +87,27 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
       return (
         <Button
           variant="ghost"
-          className="text-warning"
+          className="px-3"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Status
-          <CaretSortIcon className="ml-2 h-4 w-4" />
+          <CaretSortIcon className="h-4 w-4" />
         </Button>
       );
     },
     cell: ({ row }) => {
       const STATUS = row.getValue("status") as keyof typeof STATUS_TEXT_MAP;
       return (
-        <p
-          className={cn(
-            STATUS_COLOR_MAP[STATUS],
-            "text-sm font-bold border-2 px-2 w-fit"
-          )}
-        >
-          {STATUS_TEXT_MAP[STATUS]}
-        </p>
+        <div className="px-3">
+          <p
+            className={cn(
+              STATUS_COLOR_MAP[STATUS],
+              "text-sm font-bold border-2 px-2 w-fit "
+            )}
+          >
+            {STATUS_TEXT_MAP[STATUS]}
+          </p>
+        </div>
       );
     },
   },
@@ -111,6 +117,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
       return (
         <Button
           variant="ghost"
+          className="px-3"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Created at
@@ -118,7 +125,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => <div>{row.getValue("created_at")}</div>,
+    cell: ({ row }) => <div className="px-3">{row.getValue("created_at")}</div>,
   },
   {
     accessorKey: "due_date",
@@ -126,6 +133,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
       return (
         <Button
           variant="ghost"
+          className="px-3"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Due Date
@@ -133,7 +141,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => <div>{row.getValue("due_date")}</div>,
+    cell: ({ row }) => <div className="px-3">{row.getValue("due_date")}</div>,
   },
   {
     accessorKey: "created_by",
@@ -141,6 +149,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
       return (
         <Button
           variant="ghost"
+          className="px-3"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Created By
@@ -149,7 +158,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
       );
     },
     cell: ({ row }) => (
-      <div>{row.getValue<App.Models.Projects>("created_by").name}</div>
+      <div className="px-3">{row.getValue<App.Models.Projects>("created_by").name}</div>
     ),
   },
   {
