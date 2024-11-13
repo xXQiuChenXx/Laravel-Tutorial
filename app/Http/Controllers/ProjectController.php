@@ -17,8 +17,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        $projects = Projects::select('*')->get()->sortBy('id');
+        
         return inertia("Projects/Index", [
-            "projects" => ProjectResource::collection(Projects::all()->sortBy('id')),
+            "projects" => ProjectResource::collection($projects),
             "success" => session('success')
         ]);
     }
