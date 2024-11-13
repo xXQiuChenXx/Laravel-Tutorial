@@ -84,7 +84,7 @@ const EditProjectDialog = ({ project, ...props }: EditProjectDialogProps) => {
             <Label htmlFor="status" className="text-right py-2">
               Status:
             </Label>
-            <Select
+          <Select
               defaultValue={data.status}
               onValueChange={(value) => setData("status", value)}
               name="status"
