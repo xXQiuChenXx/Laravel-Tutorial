@@ -64,10 +64,10 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tasks $tasks)
+    public function show(Tasks $task)
     {
         return inertia("Tasks/Show", [
-            'task' => new TaskResource($tasks)
+            'task' => new TaskResource($task)
         ]);
     }
 
