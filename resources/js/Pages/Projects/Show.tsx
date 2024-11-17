@@ -33,38 +33,36 @@ const Show = ({
         </h2>
       }
     >
-      <Head title="Projects" />
+      <Head title={`Project-${data.name}`} />
 
-      <div className="py-12">
-        <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="overflow-hidden bg-white shadow-lg sm:rounded-lg dark:bg-gray-800">
-            <img
-              src={data.image_path}
-              alt="image"
-              className="w-full h-64 object-cover"
-            />
-            <div className="p-6 text-gray-900 dark:text-gray-100">
-              <div className="grid gap-2 grid-cols-1 md:grid-cols-2">
-                {PROJECT_FIELD({ project: data }).map((field, i) => (
-                  <div
-                    key={`field-${i}`}
-                    className={
-                      field.label === "Project Description" ? "col-span-2" : ""
-                    }
-                  >
-                    <p className="font-bold text-lg">{field.label}</p>
-                    <p>{field.value}</p>
-                  </div>
-                ))}
-              </div>
+      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 py-12">
+        <div className="overflow-hidden bg-white shadow-lg sm:rounded-lg dark:bg-gray-800 mx-6">
+          <img
+            src={data.image_path}
+            alt="image"
+            className="w-full h-64 object-cover"
+          />
+          <div className="p-6 text-gray-900 dark:text-gray-100">
+            <div className="grid gap-2 grid-cols-1 md:grid-cols-2">
+              {PROJECT_FIELD({ project: data }).map((field, i) => (
+                <div
+                  key={`field-${i}`}
+                  className={
+                    field.label === "Project Description" ? "col-span-2" : ""
+                  }
+                >
+                  <p className="font-bold text-lg">{field.label}</p>
+                  <p>{field.value}</p>
+                </div>
+              ))}
             </div>
           </div>
-          <TaskTable
-            data={tasks.data}
-            paginations={pagination}
-            searchFiledChanged={searchFiledChanged}
-          />
         </div>
+        <TaskTable
+          data={tasks.data}
+          paginations={pagination}
+          searchFiledChanged={searchFiledChanged}
+        />
       </div>
     </AuthenticatedLayout>
   );
