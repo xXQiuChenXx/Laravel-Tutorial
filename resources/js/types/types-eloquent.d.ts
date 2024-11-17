@@ -11,14 +11,12 @@ declare namespace App.Models {
     due_date?: string
     status: string
     image_path: string
-    created_by: number
-    updated_by: number
     created_at?: string
     updated_at?: string
     tasks_count?: number
     tasks?: App.Models.Tasks[]
-    createdBy?: App.Models.User
-    updatedBy?: App.Models.User
+    created_by?: App.Models.User
+    updated_by?: App.Models.User
   }
   export interface Tasks {
     id: number

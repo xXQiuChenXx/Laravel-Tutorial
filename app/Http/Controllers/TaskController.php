@@ -17,8 +17,8 @@ class TaskController extends Controller
     {
         $query = Tasks::query();
 
-        $sortField = request("sort_field", 'created_at');
-        $sortDirection = request("sort_direction", "desc");
+        $sortField = request("sort_field", 'id');
+        $sortDirection = request("sort_direction", "asc");
 
         if (request("name")) {
             $query->where("name", "like", "%" . request("name") . "%");
@@ -31,7 +31,7 @@ class TaskController extends Controller
             ->paginate(10)
             ->onEachSide(1);
 
-        return inertia("Task/Index", [
+        return inertia("Tasks/Index", [
             "tasks" => TaskResource::collection($tasks),
             'queryParams' => request()->query() ?: null,
             'success' => session('success'),

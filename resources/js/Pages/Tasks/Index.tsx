@@ -1,12 +1,12 @@
 import { TaskTable } from "@/Components/task_table/DataTable";
 import { PaginationProps } from "@/Components/task_table/TablePagination";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
+import { Head, router } from "@inertiajs/react";
 
 export default function Index({
   tasks,
   pagination,
-  queryParams = {},
+  queryParams = [],
 }: {
   tasks: { data: App.Models.Tasks[] };
   queryParams: { [key: string]: any };
@@ -18,6 +18,8 @@ export default function Index({
     } else {
       delete queryParams[name];
     }
+
+    router.get(route("task.index", queryParams));
   };
 
   return (

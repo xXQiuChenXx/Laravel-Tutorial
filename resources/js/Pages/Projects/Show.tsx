@@ -1,4 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { PROJECT_FIELD } from "@/lib/constants";
 import { Head } from "@inertiajs/react";
 
 const Show = ({
@@ -25,59 +26,18 @@ const Show = ({
               className="w-full h-64 object-cover"
             />
             <div className="p-6 text-gray-900 dark:text-gray-100">
-              <div className="grid gap-1 grid-cols-2">
-                <div>
-                  <div>
-                    <label htmlFor="" className="font-bold text-lg">
-                      Project ID
-                    </label>
-                    <p className="mt-1">{data.id}</p>
+              <div className="grid gap-2 grid-cols-1 md:grid-cols-2">
+                {PROJECT_FIELD({ project: data }).map((field, i) => (
+                  <div
+                    key={`field-${i}`}
+                    className={
+                      field.label === "Project Description" ? "col-span-2" : ""
+                    }
+                  >
+                    <p className="font-bold text-lg">{field.label}</p>
+                    <p>{field.value}</p>
                   </div>
-                  <div>
-                    <label htmlFor="" className="font-bold text-lg">
-                      Project Name
-                    </label>
-                    <p className="mt-1">{data.name}</p>
-                  </div>
-                  <div>
-                    <label htmlFor="" className="font-bold text-lg">
-                      Project Status
-                    </label>
-                    <p className="mt-1">{data.status}</p>
-                  </div>
-                  <div>
-                    <label htmlFor="" className="font-bold text-lg">
-                      Created By
-                    </label>
-                    <p className="mt-1">{data.created_by?.name}</p>
-                  </div>
-                </div>
-                <div>
-                  <div>
-                    <label htmlFor="" className="font-bold text-lg">
-                      Due Date
-                    </label>
-                    <p className="mt-1">{data.due_date}</p>
-                  </div>
-                  <div>
-                    <label htmlFor="" className="font-bold text-lg">
-                      Create Date
-                    </label>
-                    <p className="mt-1">{data.created_at}</p>
-                  </div>
-                  <div>
-                    <label htmlFor="" className="font-bold text-lg">
-                      Updated By
-                    </label>
-                    <p className="mt-1">{data.updated_by.name}</p>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <label htmlFor="" className="font-bold text-lg">
-                  Project Description
-                </label>
-                <p className="mt-1">{data.description}</p>
+                ))}
               </div>
             </div>
           </div>
