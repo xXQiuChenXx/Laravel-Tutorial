@@ -6,6 +6,7 @@ use App\Models\Projects;
 use App\Http\Requests\StoreProjectsRequest;
 use App\Http\Requests\UpdateProjectsRequest;
 use App\Http\Resources\ProjectResource;
+use App\Http\Resources\TaskResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,7 +19,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Projects::select('*')->get()->sortBy('id');
-        
+
         return inertia("Projects/Index", [
             "projects" => ProjectResource::collection($projects),
             "success" => session('success')
@@ -55,8 +56,33 @@ class ProjectController extends Controller
      */
     public function show(Projects $project)
     {
+        $query = $project->tasks();
+
+        $sortField = request("sort_field", 'created_at');
+        $sortDirection = request("sort_direction", "desc");
+
+        if (request("name")) {
+            $query->where("name", "like", "%" . request("name") . "%");
+        }
+        if (request("status")) {
+            $query->where("status", request("status"));
+        }
+
+        $tasks = $query->orderBy($sortField, $sortDirection)
+            ->paginate(10)
+            ->onEachSide(1);
+
         return inertia("Projects/Show", [
-            'project' => new ProjectResource($project)
+            'project' => new ProjectResource($project),
+            "tasks" => TaskResource::collection($tasks),
+            'queryParams' => request()->query() ?: null,
+            "pagination" => [
+                "current_page" => $tasks->currentPage(),
+                "page_urls" => $tasks->getUrlRange(1, $tasks->lastPage()),
+                "last_page" => $tasks->lastPage(),
+                "next_page_url" => $tasks->nextPageUrl(),
+                "prev_page_url" => $tasks->previousPageUrl(),
+            ],
         ]);
     }
 

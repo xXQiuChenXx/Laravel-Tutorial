@@ -1,12 +1,30 @@
+import { TaskTable } from "@/Components/task_table/DataTable";
+import { PaginationProps } from "@/Components/task_table/TablePagination";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PROJECT_FIELD } from "@/lib/constants";
-import { Head } from "@inertiajs/react";
+import { Head, router } from "@inertiajs/react";
 
 const Show = ({
   project: { data },
+  queryParams,
+  pagination,
+  tasks,
 }: {
   project: { data: App.Models.Projects };
+  queryParams: { [key: string]: any };
+  pagination: PaginationProps;
+  tasks: { data: App.Models.Tasks[] };
 }) => {
+  const searchFiledChanged = (name: string, value: string) => {
+    if (value) {
+      queryParams[name] = value;
+    } else {
+      delete queryParams[name];
+    }
+
+    router.get(route("task.index", queryParams));
+  };
+
   return (
     <AuthenticatedLayout
       header={
@@ -41,6 +59,11 @@ const Show = ({
               </div>
             </div>
           </div>
+          <TaskTable
+            data={tasks.data}
+            paginations={pagination}
+            searchFiledChanged={searchFiledChanged}
+          />
         </div>
       </div>
     </AuthenticatedLayout>
