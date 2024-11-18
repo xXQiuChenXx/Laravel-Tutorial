@@ -66,10 +66,6 @@ export const TASK_FIELD = ({ task }: { task: App.Models.Tasks }) => {
             value: task.priority,
         },
         {
-            label: "Task Description",
-            value: task.description,
-        },
-        {
             label: "Created By",
             value: task.created_by.name,
         },
@@ -83,7 +79,11 @@ export const TASK_FIELD = ({ task }: { task: App.Models.Tasks }) => {
         },
         {
             label: "Assigned User",
-            value: task.assigned_user_id?.name,
+            value: task.assigned_user?.name,
+        },
+        {
+            label: "Task Description",
+            value: task.description,
         },
     ];
 };

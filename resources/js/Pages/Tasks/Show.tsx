@@ -1,4 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { TASK_FIELD } from "@/lib/constants";
 import { Head } from "@inertiajs/react";
 
 const Show = ({ task: { data } }: { task: { data: App.Models.Tasks } }) => {
@@ -21,7 +22,17 @@ const Show = ({ task: { data } }: { task: { data: App.Models.Tasks } }) => {
           />
           <div className="p-6 text-gray-900 dark:text-gray-100">
             <div className="grid gap-2 grid-cols-1 md:grid-cols-2">
-                
+              {TASK_FIELD({ task: data }).map((field, i) => (
+                <div
+                  key={`field-${i}`}
+                  className={
+                    field.label === "Task Description" ? "col-span-2" : ""
+                  }
+                >
+                  <p className="font-bold text-lg">{field.label}</p>
+                  <p>{field.value}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

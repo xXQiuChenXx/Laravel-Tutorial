@@ -26,7 +26,7 @@ declare namespace App.Models {
     status: string
     priority: string
     due_date?: string
-    assigned_user_id: App.Models.User
+    assigned_user: App.Models.User
     created_by: App.Models.User
     updated_by: App.Models.User
     projects_id: App.Models.Projects
