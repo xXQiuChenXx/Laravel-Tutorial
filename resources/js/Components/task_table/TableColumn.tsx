@@ -70,7 +70,7 @@ export const columns: ColumnDef<App.Models.Tasks>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="px-3">
+      <div className="px-3 line-clamp-2 min-w-52">
         <Link href={route("task.show", row.getValue("id"))}>
           {row.getValue("name")}
         </Link>
@@ -98,7 +98,7 @@ export const columns: ColumnDef<App.Models.Tasks>[] = [
           <p
             className={cn(
               STATUS_COLOR_MAP[STATUS],
-              "text-sm font-bold border-2 px-2 w-fit"
+              "text-sm font-bold border-2 px-2 w-fit whitespace-nowrap"
             )}
           >
             {STATUS_TEXT_MAP[STATUS]}

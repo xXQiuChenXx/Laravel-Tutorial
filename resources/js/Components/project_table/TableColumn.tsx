@@ -75,7 +75,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
     cell: ({ row }) => (
       <Link
         href={route("projects.show", row.getValue("id"))}
-        className="hover:underline px-3"
+        className="hover:underline px-3 whitespace-nowrap"
       >
         {row.getValue("name")}
       </Link>
@@ -102,7 +102,7 @@ export const columns: ColumnDef<App.Models.Projects>[] = [
           <p
             className={cn(
               STATUS_COLOR_MAP[STATUS],
-              "text-sm font-bold border-2 px-2 w-fit "
+              "text-sm font-bold border-2 px-2 w-fit whitespace-nowrap"
             )}
           >
             {STATUS_TEXT_MAP[STATUS]}
