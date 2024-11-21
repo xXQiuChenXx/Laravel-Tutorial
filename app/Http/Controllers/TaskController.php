@@ -6,7 +6,6 @@ use App\Models\Tasks;
 use App\Http\Requests\StoreTasksRequest;
 use App\Http\Requests\UpdateTasksRequest;
 use App\Http\Resources\TaskResource;
-use Illuminate\Support\Facades\Cache;
 
 class TaskController extends Controller
 {

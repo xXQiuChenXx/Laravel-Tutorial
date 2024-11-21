@@ -13,7 +13,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return inertia('Users/Index', [
+            'users' => User::all(),
+        ]);
     }
 
     /**
