@@ -52,8 +52,8 @@ const EditProjectDialog = ({ project, ...props }: EditProjectDialogProps) => {
         </SheetHeader>
         <form className="flex flex-col gap-4 py-4" onSubmit={onSubmit}>
           {project.image_path && (
-            <div className="max-w-full max-h-36 overflow-auto">
-              <img src={project.image_path} alt="project_image" />
+            <div className="max-w-full max-h-52 overflow-auto">
+              <img src={project.image_path} className="max-h-52 mx-auto" alt="project_image" />
             </div>
           )}
           <div>
