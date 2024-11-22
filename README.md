@@ -1,9 +1,9 @@
 <div align="center">
-<h1>
-   <br>Laravel Tutorial<br>
-</h1>
-<a href="https://github.com/xXQiuChenXx/Laravel-Tutorial"><img src="https://github.com/xXQiuChenXx/Laravel-Tutorial/blob/master/public/image.png?raw=true" alt="Xeow"></a>
-
+    <h1>Laravel Tutorial</h1>
+    <a href="https://github.com/xXQiuChenXx/Laravel-Tutorial">
+        <img src="https://github.com/xXQiuChenXx/Laravel-Tutorial/blob/master/public/image.png?raw=true" alt="Laravel-tuto">
+    </a>
+    <br/>
 <p align="center">
   <a href="https://github.com/xXQiuChenXx/Laravel-Tutorial/releases/latest">
     <img src="https://img.shields.io/github/downloads/xXQiuChenXx/Laravel-Tutorial/total.svg" alt="Downloads">
