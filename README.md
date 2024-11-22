@@ -4,6 +4,7 @@
         <img src="https://github.com/xXQiuChenXx/Laravel-Tutorial/blob/master/public/image.png?raw=true" alt="Laravel-tuto">
     </a>
     <br/>
+    <br/>
 <p align="center">
   <a href="https://github.com/xXQiuChenXx/Laravel-Tutorial/releases/latest">
     <img src="https://img.shields.io/github/downloads/xXQiuChenXx/Laravel-Tutorial/total.svg" alt="Downloads">
